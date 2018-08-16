@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
+using InterfaceCenter;
 using System;
 using System.Threading.Tasks;
 
@@ -19,19 +20,13 @@ namespace WPFWithAOPClient.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ILogger _log;
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(ILogger log)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            this._log = log;
             Task.Run(()=> {
                 while (true)
                 {
@@ -39,6 +34,8 @@ namespace WPFWithAOPClient.ViewModel
                     Welcome = DateTime.Now.ToString();
                 }
             });
+            _log.Debug("123");
+            
         }
         private string welcome;
         /// <summary>

@@ -13,6 +13,9 @@
 */
 
 using Autofac;
+using InterfaceCenter;
+using System.IO;
+using System.Reflection;
 
 namespace WPFWithAOPClient.ViewModel
 {
@@ -30,13 +33,23 @@ namespace WPFWithAOPClient.ViewModel
         public ViewModelLocator()
         {
             var builder = new ContainerBuilder();
-
+            //local Register
             builder.RegisterType<MainViewModel>().AsSelf();
-
-
-
+            //Scan Register
+            var files = new DirectoryInfo(@".\ModuleLib\").GetFiles("*Module.dll");
+            if (files != null && files.Length > 0)
+            {
+                foreach(var item in files)
+                {
+                    builder.RegisterAssemblyModules(Assembly.LoadFile(item.FullName));
+                }
+            }
 
             Container = builder.Build();
+
+            Container.Resolve<IWork>().DoSomething("C");
+            Container.Resolve<IWork>().DoMorething("ABC");
+
         }
 
         public MainViewModel Main

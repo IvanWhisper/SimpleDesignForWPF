@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFWithAOP", "WPFWithAOP\WP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFWithAOPClient", "WPFWithAOPClient\WPFWithAOPClient.csproj", "{BF35C471-7039-4690-BB61-674E19C9EEBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{3BBE5A6A-90CA-40F1-BA63-BD61ED829640}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerModule", "LoggerModule\LoggerModule.csproj", "{28521A53-8E5C-4EF0-B50A-64F7EDC453AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceCenter", "InterfaceCenter\InterfaceCenter.csproj", "{4D695AA9-59F7-4885-8ABC-1887C2FFC577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPModule", "AOPModule\AOPModule.csproj", "{282FD798-903A-4AEE-9F19-A0CCB7C72A44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModule", "BusinessModule\BusinessModule.csproj", "{C13437D0-3C7E-4ED5-85B8-175C563467B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +31,29 @@ Global
 		{BF35C471-7039-4690-BB61-674E19C9EEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF35C471-7039-4690-BB61-674E19C9EEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF35C471-7039-4690-BB61-674E19C9EEBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28521A53-8E5C-4EF0-B50A-64F7EDC453AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28521A53-8E5C-4EF0-B50A-64F7EDC453AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28521A53-8E5C-4EF0-B50A-64F7EDC453AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28521A53-8E5C-4EF0-B50A-64F7EDC453AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D695AA9-59F7-4885-8ABC-1887C2FFC577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D695AA9-59F7-4885-8ABC-1887C2FFC577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D695AA9-59F7-4885-8ABC-1887C2FFC577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D695AA9-59F7-4885-8ABC-1887C2FFC577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282FD798-903A-4AEE-9F19-A0CCB7C72A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282FD798-903A-4AEE-9F19-A0CCB7C72A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282FD798-903A-4AEE-9F19-A0CCB7C72A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282FD798-903A-4AEE-9F19-A0CCB7C72A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13437D0-3C7E-4ED5-85B8-175C563467B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13437D0-3C7E-4ED5-85B8-175C563467B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13437D0-3C7E-4ED5-85B8-175C563467B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13437D0-3C7E-4ED5-85B8-175C563467B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28521A53-8E5C-4EF0-B50A-64F7EDC453AE} = {3BBE5A6A-90CA-40F1-BA63-BD61ED829640}
+		{282FD798-903A-4AEE-9F19-A0CCB7C72A44} = {3BBE5A6A-90CA-40F1-BA63-BD61ED829640}
+		{C13437D0-3C7E-4ED5-85B8-175C563467B8} = {3BBE5A6A-90CA-40F1-BA63-BD61ED829640}
 	EndGlobalSection
 EndGlobal

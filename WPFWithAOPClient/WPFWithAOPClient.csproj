@@ -131,6 +131,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterfaceCenter\InterfaceCenter.csproj">
+      <Project>{4d695aa9-59f7-4885-8abc-1887c2ffc577}</Project>
+      <Name>InterfaceCenter</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

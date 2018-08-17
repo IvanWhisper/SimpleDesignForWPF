@@ -8,6 +8,14 @@
         DataContext="{Binding Source={StaticResource Locator},Path=Main}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox Text="{Binding Welcome}" />
+        <StackPanel Orientation="Vertical" >
+            <StackPanel>
+                <TextBox Text="{Binding Welcome}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="login" Command="{Binding LoginSubmit}" Width="30" Height="20"/>
+                <Button Content="login" Command="{Binding DoSomethingSubmit}" Width="30" Height="20"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

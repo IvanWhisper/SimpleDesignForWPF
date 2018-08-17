@@ -25,17 +25,20 @@ namespace WPFWithAOPClient.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        private static IContainer Container { get; set; }
-
+        /// <summary>
+        /// IOCContainer
+        /// IOC容器
+        /// </summary>
+        public static IContainer Container { get; set; }
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         public ViewModelLocator()
         {
             var builder = new ContainerBuilder();
-            //local Register
+            //local Register 一般注册
             builder.RegisterType<MainViewModel>().AsSelf();
-            //Scan Register
+            //Scan Register 扫描注册 每个模块内部有对应模块的注册方法
             var files = new DirectoryInfo(@".\ModuleLib\").GetFiles("*Module.dll");
             if (files != null && files.Length > 0)
             {
@@ -47,8 +50,6 @@ namespace WPFWithAOPClient.ViewModel
 
             Container = builder.Build();
 
-            Container.Resolve<IWork>().DoSomething("C");
-            Container.Resolve<IWork>().DoMorething("ABC");
 
         }
 

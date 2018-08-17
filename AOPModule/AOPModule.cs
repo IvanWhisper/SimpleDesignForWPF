@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using AOPModule.Interceptor;
+using Autofac;
 using InterfaceCenter;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace AOPModule
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AuthInterceptor>()
-                //builder.Register(c => new ConsoleLogger())
-                //be a service
                 .As<IAuthInterceptor>();
+            builder.RegisterType<TimeoutInterceptor>()
+                .As<ITimeoutInterceptor>();
+            builder.RegisterType<TimeconsumingInterceptor>()
+                .As<ITimeconsumingInterceptor>();
         }
     }
 }

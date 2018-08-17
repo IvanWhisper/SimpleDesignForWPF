@@ -49,9 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefAttribute\InterceptorCallHandlerAttribute.cs" />
+    <Compile Include="DefAttribute\AuthInterceptorCallHandlerAttribute.cs" />
+    <Compile Include="DefAttribute\TimeConsumingInterceptorCallHandlerAttribute.cs" />
+    <Compile Include="DefAttribute\TimeoutInterceptorCallHandlerAttribute.cs" />
     <Compile Include="IAuthInterceptor.cs" />
+    <Compile Include="ICache.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="ITimeconsumingInterceptor.cs" />
+    <Compile Include="ITimeoutInterceptor.cs" />
     <Compile Include="IWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

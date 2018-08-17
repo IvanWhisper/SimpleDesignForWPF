@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace InterfaceCenter
 {
-    public interface IWork
+    public interface ICache
     {
-        void DoSomething(string token,string param);
-        void DoMorething(string token, string param);
+        string Token { get; set; }
     }
 }

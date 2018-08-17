@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace InterfaceCenter.DefAttribute
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public class InterceptorCallHandlerAttribute:Attribute
+    public class TimeoutInterceptorCallHandlerAttribute:Attribute
     {
-        public int Timeout { get; set; }
-        public InterceptorCallHandlerAttribute()
+        public Guid ObjID { get; set; }
+        public int Timeout { get; set; } = 5;
+        public TimeoutInterceptorCallHandlerAttribute()
         {
-            Timeout = 60;
+            ObjID = Guid.NewGuid();
         }
     }
 }

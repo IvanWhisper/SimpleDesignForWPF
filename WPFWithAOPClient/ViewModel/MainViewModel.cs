@@ -1,4 +1,6 @@
+using Autofac;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using InterfaceCenter;
 using System;
@@ -38,15 +40,54 @@ namespace WPFWithAOPClient.ViewModel
             
         }
         private string welcome;
-        /// <summary>
-        /// ª∂”≠¥  Ù–‘
-        /// </summary>
+  
         public string Welcome
         {
             get { return welcome; }
             set {
                 welcome = value;
                 RaisePropertyChanged(() => Welcome);
+            }
+        }
+        private RelayCommand loginSubmit;
+        public RelayCommand LoginSubmit
+        {
+            get
+            {
+                if (loginSubmit == null) return new RelayCommand(() => Login());
+                return loginSubmit;
+            }
+            set { loginSubmit = value; }
+        }
+        private RelayCommand doSomethingSubmit;
+        public RelayCommand DoSomethingSubmit
+        {
+            get
+            {
+                if (doSomethingSubmit == null) return new RelayCommand(() => DoWork());
+                return loginSubmit;
+            }
+            set { doSomethingSubmit = value; }
+        }
+
+        private void DoWork()
+        {
+            using (var scope = ViewModelLocator.Container.BeginLifetimeScope())
+            {
+                var cache = scope.Resolve<ICache>();
+                var work = scope.Resolve<IWork>();
+                work.DoSomething(cache.Token, "something 12345");
+                work.DoMorething(cache.Token, "morething 6789");
+            }
+
+        }
+
+        private void Login()
+        {
+            using (var scope = ViewModelLocator.Container.BeginLifetimeScope())
+            {
+                var cache = scope.Resolve<ICache>();
+                cache.Token = "ABC";
             }
         }
     }

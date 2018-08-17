@@ -1,19 +1,21 @@
 ﻿using Castle.DynamicProxy;
 using InterfaceCenter;
 using InterfaceCenter.DefAttribute;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AOPModule
 {
-    public class AuthInterceptor : IAuthInterceptor
+    public class TimeoutInterceptor : ITimeoutInterceptor
     {
         private ILogger _log;
-        public AuthInterceptor(ILogger log)
+        public TimeoutInterceptor(ILogger log)
         {
             this._log = log;
         }
@@ -26,20 +28,27 @@ namespace AOPModule
             {
                 methodInfo = invocation.Method;
             }
-            AuthInterceptorCallHandlerAttribute authInterceptor = methodInfo.GetCustomAttributes<AuthInterceptorCallHandlerAttribute>(true).FirstOrDefault();
-            if (authInterceptor != null)
+            TimeoutInterceptorCallHandlerAttribute timeoutInterceptor = methodInfo.GetCustomAttributes<TimeoutInterceptorCallHandlerAttribute>(true).FirstOrDefault();
+            if (timeoutInterceptor != null)
             {
                 _log.Info($"Method:[{invocation.Method.Name}] Param[{string.Join(",", invocation.Arguments.Select(a => a ?? "").ToString())}]");
                 //adminToken
-                if (invocation.Arguments!= null&& invocation.Arguments.Count()>0 && invocation.Arguments[0].ToString().Equals("ABC"))
+                //悲观超时（无法终止后续任务，仅仅抛出异常）=》乐观超时
+                Policy timeoutPolicy = Policy.Timeout(timeoutInterceptor.Timeout,Polly.Timeout.TimeoutStrategy.Pessimistic,(a,b,c)=> {
+                    _log.Info($"timeout"); 
+                });
+                try
                 {
-                    _log.Info($"[{authInterceptor.ObjID}] Token is right!");
-                    invocation.Proceed();
-                    _log.Info($"Method:[{invocation.Method.Name}] is done!");
+                    timeoutPolicy.Execute(
+                    () =>
+                    {
+                        invocation.Proceed();
+                    }
+                    );
                 }
-                else
+                catch
                 {
-                    _log.Info($"You can't use this Method[{invocation.Method.Name}]");
+
                 }
             }
             else

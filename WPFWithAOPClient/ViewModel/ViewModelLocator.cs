@@ -47,10 +47,7 @@ namespace WPFWithAOPClient.ViewModel
                     builder.RegisterAssemblyModules(Assembly.LoadFile(item.FullName));
                 }
             }
-
             Container = builder.Build();
-
-
         }
 
         public MainViewModel Main

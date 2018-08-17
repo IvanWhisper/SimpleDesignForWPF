@@ -15,12 +15,9 @@ namespace BusinessModule
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Work>()
-                //builder.Register(c => new ConsoleLogger())
-                //be a service
                 .As<IWork>()
-                //.InterceptedBy(typeof(IAuthInterceptor))
+                //开启拦截
                 .EnableInterfaceInterceptors();
-                //be a SingleInstance
         }
     }
 }

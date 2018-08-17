@@ -13,8 +13,8 @@
                 <TextBox Text="{Binding Welcome}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Content="login" Command="{Binding LoginSubmit}" Width="30" Height="20"/>
-                <Button Content="login" Command="{Binding DoSomethingSubmit}" Width="30" Height="20"/>
+                <Button Content="login" Command="{Binding LoginSubmit}" Width="100" Height="20" Margin="5"/>
+                <Button Content="DoThing" Command="{Binding DoSomethingSubmit}" Width="100" Height="20" Margin="5" />
             </StackPanel>
         </StackPanel>
     </Grid>

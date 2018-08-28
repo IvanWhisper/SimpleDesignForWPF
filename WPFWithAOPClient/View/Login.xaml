@@ -1,0 +1,28 @@
+﻿<Window x:Class="WPFWithAOPClient.View.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFWithAOPClient.View"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator},Path=Login}"
+        Title="Login" Height="200" Width="300">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="用户名"/>
+                    <TextBox Text="" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="密码"/>
+                    <PasswordBox Width="100"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <Button Content="Login" Command="{Binding LoginSubmit}" Width="100" Height="20" Margin="5"/>
+                <Button Content="Cancel" Command="{Binding DoSomethingSubmit}" Width="100" Height="20" Margin="5" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

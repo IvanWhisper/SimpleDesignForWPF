@@ -13,9 +13,12 @@
 */
 
 using Autofac;
+using GalaSoft.MvvmLight.Views;
 using InterfaceCenter;
 using System.IO;
 using System.Reflection;
+using System.Windows;
+using WPFWithAOPClient.View;
 
 namespace WPFWithAOPClient.ViewModel
 {
@@ -37,7 +40,10 @@ namespace WPFWithAOPClient.ViewModel
         {
             var builder = new ContainerBuilder();
             //local Register 一般注册
-            builder.RegisterType<MainViewModel>().AsSelf();
+            builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<LoginViewModel>().AsSelf().SingleInstance();
+
+
             //Scan Register 扫描注册 每个模块内部有对应模块的注册方法
             var files = new DirectoryInfo(@".\ModuleLib\").GetFiles("*Module.dll");
             if (files != null && files.Length > 0)
@@ -49,7 +55,9 @@ namespace WPFWithAOPClient.ViewModel
             }
             Container = builder.Build();
         }
-
+        /// <summary>
+        /// MainView的ViewModel
+        /// </summary>
         public MainViewModel Main
         {
             get
@@ -57,10 +65,24 @@ namespace WPFWithAOPClient.ViewModel
                 return Container.Resolve<MainViewModel>();
             }
         }
-        
+        /// <summary>
+        /// MainView的ViewModel
+        /// </summary>
+        public LoginViewModel Login
+        {
+            get
+            {
+                return Container.Resolve<LoginViewModel>();
+            }
+        }
+        /// <summary>
+        /// 清理
+        /// </summary>
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+            Container.Dispose();
+            Container = null;
         }
     }
 }

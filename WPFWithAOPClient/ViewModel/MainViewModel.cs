@@ -40,7 +40,6 @@ namespace WPFWithAOPClient.ViewModel
             
         }
         private string welcome;
-  
         public string Welcome
         {
             get { return welcome; }
@@ -88,6 +87,7 @@ namespace WPFWithAOPClient.ViewModel
             {
                 var cache = scope.Resolve<ICache>();
                 cache.Token = "ABC";
+                App.GetWindow("login").Show();
             }
         }
     }

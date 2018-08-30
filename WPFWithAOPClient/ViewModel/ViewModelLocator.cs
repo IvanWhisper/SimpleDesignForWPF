@@ -16,9 +16,17 @@ using Autofac;
 using GalaSoft.MvvmLight.Views;
 using InterfaceCenter;
 using System.IO;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
+using System.Reactive.Subjects;
 using System.Reflection;
 using System.Windows;
 using WPFWithAOPClient.View;
+using System.Threading;
+using System.Threading.Tasks;
+using System;
 
 namespace WPFWithAOPClient.ViewModel
 {
@@ -43,18 +51,40 @@ namespace WPFWithAOPClient.ViewModel
             builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<LoginViewModel>().AsSelf().SingleInstance();
 
+            var watch = new FileSystemWatcher(@".\ModuleLib\");
 
+            //拉式扫描
             //Scan Register 扫描注册 每个模块内部有对应模块的注册方法
             var files = new DirectoryInfo(@".\ModuleLib\").GetFiles("*Module.dll");
             if (files != null && files.Length > 0)
             {
-                foreach(var item in files)
+                foreach (var item in files)
                 {
                     builder.RegisterAssemblyModules(Assembly.LoadFile(item.FullName));
                 }
             }
+ 
+            watch.EnableRaisingEvents = true;
+            //推式加载  热加载  响应式
+            Observable.FromEventPattern<FileSystemEventArgs>(watch, "Created")
+                .Where(e => e.EventArgs.FullPath.Contains(".dll"))
+                .Subscribe(e =>
+                {
+                    Console.WriteLine(e.EventArgs.FullPath);
+                    builder.RegisterAssemblyModules(Assembly.LoadFile(Path.GetFullPath(e.EventArgs.FullPath)));
+                });
+
+
+
+      
             Container = builder.Build();
         }
+
+        private void Watch_Created(object sender, FileSystemEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
         /// MainView的ViewModel
         /// </summary>

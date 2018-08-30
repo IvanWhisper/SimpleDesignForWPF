@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using InterfaceCenter;
 using System;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace WPFWithAOPClient.ViewModel
@@ -29,14 +30,7 @@ namespace WPFWithAOPClient.ViewModel
         public MainViewModel(ILogger log)
         {
             this._log = log;
-            Task.Run(()=> {
-                while (true)
-                {
-                    Task.Delay(1000);
-                    Welcome = DateTime.Now.ToString();
-                }
-            });
-            _log.Debug("123");
+   
             
         }
         private string welcome;
